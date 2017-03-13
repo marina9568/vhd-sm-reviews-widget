@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Vet Help Direct API Reviews Widget
- * Plugin URI: https://github.com/vhd-sm-reviews-widget
+ * Plugin URI: https://github.com/marina9568/vhd-sm-reviews-widget
  * Description: Displays reviews via Vet Help Direct API
  * Version: 1.0
  * Author: Sokolova Marina
@@ -33,7 +33,8 @@ function vhd_sm_reviews_includes(){
     wp_enqueue_style( 'vhd-sm-owl-theme-carousel-css', plugins_url( '/lib/assets/owl.theme.default.min.css', __FILE__ ));
     wp_enqueue_style( 'vhd-sm-reviews-css', plugins_url( '/css/style.css', __FILE__ ));
 }
-add_action('wp_enqueue_scripts', 'vhd_sm_reviews_includes');
+
+add_action( 'wp_enqueue_scripts', 'vhd_sm_reviews_includes' );
 
 require_once VHD_SM_PLUGIN_DIR . '/vhd-sm-reviews.php';
 

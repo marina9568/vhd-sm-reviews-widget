@@ -45,6 +45,27 @@ Using FTP
 3. Upload the vhd-sm-reviews-widget.zip directory to the /wp-content/plugins/ directory
 4. Activate the plugin in the Plugin dashboard
 
+== Frequently Asked Questions ==
+
+= Is it free? =
+
+Yes, it is completely free.
+
+= How Can I get the key for Vet Help Direct API? =
+
+This widget was created by developers for developers and users who are already working with this service. To make their lives easier.
+We don't sell any services. Very sorry, but this widget is only for those who have the key.
+
+= Can I change widget style? =
+Yes, every widget element has an own class. So, you can set your custom styles.
+
+For any further questions, you can contact us.
+
+== Screenshots ==
+1. Widget displaying with original styles
+2. Widget displaying with custom styles
+3. Manage widget
+
 == Changelog ==
 
 = 1.0.0 =

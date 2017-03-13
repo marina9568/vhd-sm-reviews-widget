@@ -31,7 +31,7 @@ class vhd_sm_reviews_widget extends WP_Widget {
         $vhd_sm_dw = new vhd_sm_display_reviews();
         
         
-        $content = $vhd_sm_dw->get_reviews_content($params);
+        $content = $vhd_sm_dw->get_reviews_content( $params );
         
         echo __( $content, 'vhd_sm_reviews_widget_domain' );
         
@@ -39,10 +39,10 @@ class vhd_sm_reviews_widget extends WP_Widget {
     }
     
     public function form( $instance ) {
-        $title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : __( 'Clients Reviews', 'vhd_sm_reviews_widget_domain');
-        $api_url = isset( $instance[ 'api_url' ] ) ? $instance[ 'api_url' ] : __( 'http://vethelpdirect.com/dashboard/api', 'vhd_sm_reviews_widget_domain');
-        $api_key = isset( $instance[ 'api_key' ] ) ? $instance[ 'api_key' ] : __( '', 'vhd_sm_reviews_widget_domain');
-        $max_items = isset( $instance[ 'max_items' ] ) ? $instance[ 'max_items' ] : __( '5', 'vhd_sm_reviews_widget_domain');
+        $title     = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : __( 'Clients Reviews', 'vhd_sm_reviews_widget_domain' );
+        $api_url   = isset( $instance[ 'api_url' ] ) ? $instance[ 'api_url' ] : __( 'http://vethelpdirect.com/dashboard/api', 'vhd_sm_reviews_widget_domain' );
+        $api_key   = isset( $instance[ 'api_key' ] ) ? $instance[ 'api_key' ] : __( '', 'vhd_sm_reviews_widget_domain' );
+        $max_items = isset( $instance[ 'max_items' ] ) ? $instance[ 'max_items' ] : __( '5', 'vhd_sm_reviews_widget_domain' );
         ?>
         <p>
             <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
@@ -65,10 +65,10 @@ class vhd_sm_reviews_widget extends WP_Widget {
         
     public function update( $new_instance, $old_instance ) {
         $instance = $old_instance;
-        $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-        $instance['api_url'] = ( ! empty( $new_instance['api_url'] ) ) ? strip_tags( $new_instance['api_url'] ) : '';
-        $instance['api_key'] = ( ! empty( $new_instance['api_key'] ) ) ? strip_tags( $new_instance['api_key'] ) : '';
-        $instance['max_items'] = ( ! empty( $new_instance['max_items'] ) ) ? strip_tags( $new_instance['max_items'] ) : '';
+        $instance['title']       = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+        $instance['api_url']     = ( ! empty( $new_instance['api_url'] ) ) ? strip_tags( $new_instance['api_url'] ) : '';
+        $instance['api_key']     = ( ! empty( $new_instance['api_key'] ) ) ? strip_tags( $new_instance['api_key'] ) : '';
+        $instance['max_items']   = ( ! empty( $new_instance['max_items'] ) ) ? strip_tags( $new_instance['max_items'] ) : '';
         $instance['is_autoplay'] = ( ! empty( $new_instance['is_autoplay'] ) ) ? strip_tags( $new_instance['is_autoplay'] ) : '';
         
         
@@ -79,7 +79,7 @@ class vhd_sm_reviews_widget extends WP_Widget {
 class vhd_sm_display_reviews {
     
     public function get_api_data( $params ) {
-        $url = trailingslashit($params['api_url']) . 'fetch-review-data/' . $params['api_key'] . '/' . $params['max_items'];
+        $url = trailingslashit( $params['api_url'] ) . 'fetch-review-data/' . $params['api_key'] . '/' . $params['max_items'];
         $ch = curl_init( $url );
         curl_setopt_array( $ch, array(
             CURLOPT_RETURNTRANSFER => TRUE
@@ -93,9 +93,9 @@ class vhd_sm_display_reviews {
     public function get_slider( $data ) {
         $slider = '';
         if ( ! empty ( $data['review_data']['reviews'] ) && $data['review_data']['numberOfReviews'] > 0 ) {
-            $id = md5(rand());
+            $id = md5( rand() );
             $slider = '<div id="' . $id . '" class="owl-carousel owl-theme">';
-            $i = 0;
+
             foreach ( $data['review_data']['reviews'] as $review ) {
                 $slider .= '<div class="vhd_review">'
                         . $this->get_stars( $data['assets'], $review['stars'] )
@@ -106,6 +106,7 @@ class vhd_sm_display_reviews {
                         . '<div class="vhd_review_date">' . $review['date'] . '</div>'
                         . '</div>';
             }
+            
             $slider .= '</div>';
             $slider .= '<script>jQuery(document).ready(function($){
               $(".owl-carousel#' . $id . '").owlCarousel({loop:true, items:1, autoplay:true, autoplayHoverPause:true, autoplaySpeed:400});
