@@ -1,0 +1,39 @@
+.vhd_review_content {
+    width: 100%;
+    min-width: 120px;
+    text-align: center;    
+}
+
+.vhd_review_logo {
+    padding: 0 10px;
+}
+.vhd_review_logo img {
+    max-width: 100%;
+    display: block;
+    margin: auto;
+}
+
+.vhd_review .vhd_review_stars {
+    width: 100%;
+    padding: 10px 5px;
+}
+.vhd_review .vhd_review_stars img {
+    display: inline-block;
+    width: auto;
+    width: 30px;
+    margin: 2px;
+}
+
+.vhd_review_text {
+    padding: 5%;
+}
+.vhd_review_name {
+    font-weight: bold;
+}
+.vhd_review_date {
+    font-style: italic;
+}
+.vhd_review_links a {
+    margin: 10px 5px;
+    display: inline-block;
+}
