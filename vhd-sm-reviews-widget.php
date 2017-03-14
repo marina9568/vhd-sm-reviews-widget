@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Vet Help Direct API Reviews Widget
+ * Plugin Name: Widget for customization VetHelpDirect Reviews
  * Plugin URI: https://github.com/marina9568/vhd-sm-reviews-widget
  * Description: Displays reviews via Vet Help Direct API
  * Version: 1.0

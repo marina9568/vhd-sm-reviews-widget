@@ -1,4 +1,4 @@
-﻿===  Vet Help Direct API Widget ===
+﻿===  Widget for customization VetHelpDirect Reviews  ===
 
 Contributors: marina9568
 Tags:  reviews, review, vets, vet help direct, widget.
