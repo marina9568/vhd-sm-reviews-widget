@@ -1,7 +1,8 @@
 .vhd_review_content {
     width: 100%;
     min-width: 120px;
-    text-align: center;    
+    text-align: center;  
+    position: relative;
 }
 
 .vhd_review_logo {
@@ -33,7 +34,29 @@
 .vhd_review_date {
     font-style: italic;
 }
-.vhd_review_links a {
+.vhd_review_link {
     margin: 10px 5px;
     display: inline-block;
+}
+.vhd_review_popup {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 5%;
+    display: none;
+}
+.vhd_review_popup_select select {
+    display: none;
+    max-width: 100%;
+}
+.vhd_review_popup-content>a, .vhd_review_popup-content>a:hover {
+    color: #fff;
+}
+.vhd_review_popup-title {
+    color: #fff;
+    font-size: 1.6em;
 }

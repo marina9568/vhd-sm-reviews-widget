@@ -26,7 +26,10 @@ if ( ! defined( 'VHD_SM_PLUGIN_DIR' ) ) {
 
 
 function vhd_sm_reviews_includes(){
-    wp_register_script( 'vhd-sm-reviews-js', plugins_url( '/lib/owl.carousel.min.js', __FILE__ ), array( 'jquery' ), '2.2.1' );
+    wp_register_script( 'vhd-sm-reviews-owl-js', plugins_url( '/lib/owl.carousel.min.js', __FILE__ ), array( 'jquery' ), '2.2.1' );
+    wp_enqueue_script( 'vhd-sm-reviews-owl-js' );
+    
+    wp_register_script( 'vhd-sm-reviews-js', plugins_url( '/js/main.js', __FILE__ ), array( 'jquery' ), '1.0' );
     wp_enqueue_script( 'vhd-sm-reviews-js' );
     
     wp_enqueue_style( 'vhd-sm-owl-carousel-css', plugins_url( '/lib/assets/owl.carousel.min.css', __FILE__ ));

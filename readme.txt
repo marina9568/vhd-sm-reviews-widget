@@ -8,11 +8,11 @@ Stable tag: 4.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Displays reviews via Vet Help Direct API.
+Displays reviews via VetHelpDirect API.
 
 == Description ==
 
-Displays reviews via Vet Help Direct API.
+Displays reviews via VetHelpDirect API.
 
 
 == Support & Customizations ==
@@ -67,6 +67,8 @@ For any further questions, you can contact us.
 3. Manage widget
 
 == Changelog ==
+= 1.1.0 =
+* Added functionality to choose practice from grope reviews *
 
 = 1.0.0 =
 * initial *

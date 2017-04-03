@@ -79,21 +79,27 @@ class vhd_sm_reviews_widget extends WP_Widget {
 class vhd_sm_display_reviews {
     
     public function get_api_data( $params ) {
-        $url = trailingslashit( $params['api_url'] ) . 'fetch-review-data/' . $params['api_key'] . '/' . $params['max_items'];
-        $ch = curl_init( $url );
-        curl_setopt_array( $ch, array(
-            CURLOPT_RETURNTRANSFER => TRUE
-        ) );
-        $response = curl_exec( $ch );
-        $result = json_decode( $response, TRUE );
+        $result = wp_cache_get('vhd_reviews_' . $params['api_key']);
         
+        if (! $result) {
+            $url = trailingslashit( $params['api_url'] ) . 'fetch-review-data/' . $params['api_key'] . '/' . $params['max_items'];
+            $ch = curl_init( $url );
+            curl_setopt_array( $ch, array(
+                CURLOPT_RETURNTRANSFER => TRUE
+            ) );
+            $response = curl_exec( $ch );
+            $result = json_decode( $response, TRUE );
+            
+            wp_cache_set('vhd_reviews_' . $params['api_key'], $result);
+        }
+
         return $result;
     }
     
-    public function get_slider( $data ) {
+    public function get_slider( $data, $id ) {
         $slider = '';
         if ( ! empty ( $data['review_data']['reviews'] ) && $data['review_data']['numberOfReviews'] > 0 ) {
-            $id = md5( rand() );
+            
             $slider = '<div id="' . $id . '" class="owl-carousel owl-theme">';
 
             foreach ( $data['review_data']['reviews'] as $review ) {
@@ -119,25 +125,56 @@ class vhd_sm_display_reviews {
     }
     
     public function get_reviews_content( $params ) {
+        $id = substr( md5( rand() ), 2, 6 );
+        
         $content = '<div class="vhd_review_content">';
         
         $data = $this->get_api_data( $params );
         
+        if (empty($data) || empty($data['assets'])) {
+            return "";
+        }
         $logo = '<div class="vhd_review_logo"><a target="_blank" href="'
                 . $data['assets']['vhdUrl'] . '"><img src="'
                 . $data['assets']['logoSmall'] . '" alt="'
                 . $data['assets']['vhdUrl'] . '"></a></div>';
-        $slider = $this->get_slider( $data );
+        $slider = $this->get_slider( $data, $id );
         
         $links = '';
         if ( ! $this->is_group( $data ) ) {
             $links = '<div class="vhd_review_links">'
-                    . '<a target="_blank" class="vhd_review_read_more" href="'
+                    . '<a target="_blank" class="vhd_review_link vhd_review_read_more" href="'
                     . $data['assets']['vhdUrl'] . $data['links']['practice_page']
                     . '#startofreviews">Read More</a>'
-                    . '<a target="_blank" class="vhd_review_add" href="'
+                    . '<a target="_blank" class="vhd_review_link vhd_review_add" href="'
                     . $data['links']['write_review']
                     . '">Add Review</a></div>';
+        } else {
+            $links = '<div class="vhd_review_links">'
+                    . '<a class="vhd_review_link vhd_review_link_popup" data-type="more" data-popup="' . $id . '" href="#">Read More</a>'
+                    . '<a class="vhd_review_link vhd_review_link_popup" data-type="add" data-popup="' . $id . '" href="#">Add Review</a></div>';
+            
+            $links.= '<div class="vhd_review_popup ' . $id . '">'
+                    . '<div class="vhd_review_popup-content">'
+                    . '<p class="vhd_review_popup-title">Which practice?</p>'
+                    . '<div class="vhd_review_popup_select">';
+            
+            $options_more = '';
+            $options_add = '';
+            foreach ($data as $item) {
+                if ( !empty($item['links']) && !empty($item['practice_details'])) {
+                    $options_more .= '<option value="' . $data['assets']['vhdUrl'] . $item['links']['practice_page'] . '">' . $item['practice_details']['name'] . '</option>';
+                    $options_add .= '<option value="' . $item['links']['write_review'] . '">' . $item['practice_details']['name'] . '</option>';
+                }
+            }
+
+            $links.= '<select class="vhd_review_popup_select_more">' . $options_more . '</select>'
+                    . '<select class="vhd_review_popup_select_add">' . $options_add . '</select>'
+                    . '</div>'
+                    . '<a href="" target="_blank" class="vhd_review_link vhd_review_popup_continue">Continue</a>'
+                    . '<a href="" class="vhd_review_link vhd_review_popup_close">Close</a>'
+                    . '</div>'
+                    . '</div>';
         }
         
         $content .= $logo . $slider . $links;
