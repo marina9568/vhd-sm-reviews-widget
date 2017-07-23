@@ -24,7 +24,6 @@ if ( ! defined( 'VHD_SM_PLUGIN_DIR' ) ) {
     define( 'VHD_SM_PLUGIN_DIR', untrailingslashit( dirname( __FILE__ ) ) );
 }
 
-
 function vhd_sm_reviews_includes(){
     wp_register_script( 'vhd-sm-reviews-owl-js', plugins_url( '/lib/owl.carousel.min.js', __FILE__ ), array( 'jquery' ), '2.2.1' );
     wp_enqueue_script( 'vhd-sm-reviews-owl-js' );

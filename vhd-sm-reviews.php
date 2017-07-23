@@ -147,7 +147,7 @@ class vhd_sm_display_reviews {
                     . $data['assets']['vhdUrl'] . $data['links']['practice_page']
                     . '#startofreviews">Read More</a>'
                     . '<a target="_blank" class="vhd_review_link vhd_review_add" href="'
-                    . $data['links']['write_review']
+                    . $data['links']['write_review'] . '&formid=7&color=ffffff&color2=ffffff'
                     . '">Add Review</a></div>';
         } else {
             $links = '<div class="vhd_review_links">'
@@ -164,7 +164,7 @@ class vhd_sm_display_reviews {
             foreach ($data as $item) {
                 if ( !empty($item['links']) && !empty($item['practice_details'])) {
                     $options_more .= '<option value="' . $data['assets']['vhdUrl'] . $item['links']['practice_page'] . '">' . $item['practice_details']['name'] . '</option>';
-                    $options_add .= '<option value="' . $item['links']['write_review'] . '">' . $item['practice_details']['name'] . '</option>';
+                    $options_add .= '<option value="' . $item['links']['write_review'] . '&formid=7&color=ffffff&color2=ffffff">' . $item['practice_details']['name'] . '</option>';
                 }
             }
 
